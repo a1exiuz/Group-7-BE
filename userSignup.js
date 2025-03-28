@@ -1,6 +1,6 @@
 import { auth, db } from '../config/firebaseAdmin.js';
 
-const signUpUser = async (email, password, role) => {
+const signUpUser = async (email, password, firstName, lastName, age, role) => {
   try {
   
     const userCredential = await auth.createUser({ email, password });
@@ -8,7 +8,10 @@ const signUpUser = async (email, password, role) => {
 
     await db.collection('users').doc(user.uid).set({
       email: user.email,
-      role: role,  
+      firstName: firstName,
+      lastName: lastName,
+      age: age,
+      role: "trainee",  
       createdAt: new Date(),
     });
 
